@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="reset.css">
+		<title>randomTest</title>
+		<style>
+			@charset "utf-8";
+			
+		</style>
+	</head>
+	<body>
+		<header>
+		</header>
+		<main>
+			<div id="viewNextPresenter"></div>
+		</main>
+		<footer>
+		</footer>
+		<script>
+			'use strict';
+			let presenterArray = [
+				'石丸　真衣',
+				'遠藤　佳菜子',
+				'大島　法子',
+				'加津間　聡',
+				'小林　薫',
+				'小林　優太',
+				'澤井　創太郎',
+				'髙橋　裕治',
+				'豊田　大樹',
+				'鳥越　貴翔',
+				'西山　颯介',
+				'松縄　愛',
+				'宮下　亮',
+				'吉川　秀之'
+			];
+			// 次の発表者を選択(ランダム)
+			// 引数：Array
+			// 返値：Arrayのindex
+			function selectIndexAtRandom(ary) {
+				return Math.floor(Math.random()*ary.length);
+			}
+			// 指定されたindexをArrayから削除
+			function deletePresenterAtIndex(ary,index) {
+				ary.splice(index,1);
+			}
+			// リストの表示場所
+			let viewPresentersContainer = document.getElementById("viewNextPresenter");
+			// 動作確認
+			let result = [];
+			for(let i=0; presenterArray.length>0; i++) {;
+				let selectIndex = selectIndexAtRandom(presenterArray);
+				let selectPresenter = presenterArray[selectIndex];
+				console.log(`${i+1}th = ${selectIndex}:${selectPresenter}`);
+				deletePresenterAtIndex(presenterArray,selectIndex);
+				console.log(presenterArray);
+				result.push(selectPresenter);
+			}
+			console.log(result);
+			// リストの表示
+			let listHTML = '';
+			for(let i=0; i<result.length; i++) {
+				listHTML += '<h1>' + (i+1) + '番目：' + result[i] + 'さん</h1>'
+			}
+			viewPresentersContainer.innerHTML = listHTML;
+		</script>
+	</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="reset.css">
+		<title></title>
+		<style>
+			@charset "utf-8";
+			div { background: #ffa; padding: 5px; }
+			p { background: #aaf; padding: 5px; }
+		</style>
+	</head>
+	<body>
+		<head>
+		</head>
+		<main>
+			<!-- pタグ に divタグは不可 -->
+			<p>p-test<div>div-test</div></p>
+			<div>div-test<p>p-test</p></div>
+
+		</main>
+		<footer>
+		</footer>
+		<script>
+			'use strict';
+			//
+			async function asyncTest() {
+				return 1;
+			}
+			console.log(asyncTest()); // Promiseオブジェクトが返される
+			//
+			async function asyncTest2() {
+				let promise = new Promise((resolve, reject) => {
+					setTimeout( function() {resolve("done!")}, 1000 );
+				});
+				const startTime = new Date();
+				let result = await promise; // 変数promiseの処理待ち
+				const endTime = new Date();
+				//
+				console.log( result );
+				console.log(`finish:::${endTime-startTime}ms`);
+			}
+			asyncTest2();
+			//
+			async function asyncTestWait3s() {
+				console.log('start wait3s');
+				let test = await new Promise(
+					(resolve, reject) => {
+						// resolve( value ) : ジョブが成功した場合。値 value
+						// resolve( error ) : ジョブが失敗した場合。エラーオブジェクト error
+						console.log(resolve);
+						console.log(reject);
+						setTimeout(resolve, 3000,'success job');
+					}
+				); // 処理待ち(Promiseオブジェクトの設定待ち)
+				console.log('end wait3s');
+				return test;
+			}
+			console.log(asyncTestWait3s().result);
+			//
+			async function asyncCheck() {
+				const onFullfilled = (value) => {console.log(value);};
+				const onReject = () => {console.log('reject');};
+				asyncTestWait3s().then(onFullfilled,onReject);
+			}
+			asyncCheck();
+			//
+			// key
+		</script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="reset.css">
+		<title>Test</title>
+		<style>
+			@charset "utf-8";
+			header {
+				height: 10vh;
+				padding: 0.5em 1em;
+				color: #33f;
+				background: #003;
+			}
+			main {
+				width: 100%;
+				background: #000;
+				
+				padding: 10px;
+			}
+			.base {
+				width: 200px;
+				height: 300px;
+				background: #fff;
+				margin: 0 auto;
+				padding: 0.5em;
+				position: relative;
+			}
+			.panel {
+				width: 100px;
+				height: 100px;
+				padding: 0.5em;
+				color: #fff;
+				background: #00f9;
+				
+				position: absolute;
+				left: 25%;
+				top: 50%;
+			}
+			footer {
+				height: 10vh;
+				padding: 0.5em 1em;
+				color: #f33;
+				background: #300;
+			}
+			p.test,
+			a.test {
+				font-size: 14px;
+				line-height: 100%;
+				background: #ffc9;
+				margin: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			header
+		</header>
+		<main>
+			<p class="test">more</p>
+			<a class="test">more</a>
+			<div class="base">
+				base
+				<div class="panel">in-panel</div>
+			</div>
+			<div class="panel">out-panel</div>
+		</main>
+		<footer>
+			footer
+		</footer>
+	</body>
+</html>

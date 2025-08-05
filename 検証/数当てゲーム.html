@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="reset.css">
+		<title>数当てゲーム</title>
+		<style>
+			@charset "utf-8";
+		</style>
+	</head>
+	<body>
+		<head>
+		</head>
+		<main>
+		</main>
+		<footer>
+		</footer>
+		<script>
+			'use strict';
+			
+			// let a = 5;
+			// let b = false;
+			// console.log( a=b );
+			// if( a=b ) {
+			// 	console.log('真');
+			// }
+			// else {
+			// 	console.log('偽');
+			// }
+			// console.log('a='+a);
+			// console.log('b='+b);
+			
+			const number = Math.floor( Math.random() * 6 );
+			let gameOverFlg = false;
+			let clearFlg = false;
+			let count = 0;
+			
+			while( !gameOverFlg ) {
+				const preAnswer = window.prompt('数当てゲーム。0〜5の数字を入力してね。');
+				const answer = parseInt( preAnswer );
+				count += 1;
+				console.log(count +'回目：');
+				console.log('あなたが入力したのは、「 ' + answer +' 」です。');
+				let message;
+				if( preAnswer === null ) {
+					gameOverFlg = true;
+				}
+				else if( answer === number ) {
+					message = 'あたり！';
+					gameOverFlg = true;
+					clearFlg = true;
+				}
+				else if( answer < number ) {
+					message = '残念でした！もっと大きい';
+				}
+				else if( answer > number ) {
+					message = '残念でした！もっと小さい';
+				}
+				else {
+					message = '0〜5の数字を入力してね。';
+				}
+				console.log( message );
+				window.alert( message );
+			}
+			//
+			if( clearFlg ) {
+				console.log('正解は、「 ' + number +' 」でした。');
+				console.log( count + '回目で正解しました。' );
+			}
+			else {
+				console.log('ゲームを終了しました。');
+				window.alert('ゲームを終了しました。');
+			}
+		</script>
+	</body>
+</html>

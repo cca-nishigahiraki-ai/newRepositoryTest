@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="reset.css">
+		<title>absoluteTest</title>
+		<style>
+			@charset "utf-8";
+			body {
+				background: #333;
+			}
+			.top {
+				width: 100%;
+				padding: 10px 0px;
+				background: #000;
+				display: flex;
+				justify-content: space-evenly;
+			}
+			.top>li {
+				width: 23%;
+				padding: 5px;
+				background: #333;
+			}
+			header .menu {
+				color: #999;
+				font-weight: bold;
+				text-align: center;
+			}
+			.sub {
+				width: 100%;
+				padding: 5px;
+				background: #666;
+				display: none;
+				position: absolute;
+				left: 0px;
+				z-index: 100;
+			}
+			li:has(.sub.wide) {
+				position: relative;
+			}
+			.sub>li {
+				width: 100%;
+			}
+			.top>li:hover {
+				background: #666;
+			}
+			.top>li:hover>.menu {
+				color: #fff;
+			}
+			.top>li:hover>.sub {
+				display: block;
+			}
+			/**/
+			main {
+				width: 100%;
+				padding: 10px;
+			}
+			main>h1, main>p {
+				color: #999;
+			}
+			.frame {
+				padding: 0px 0px 0px 10px;
+				display: flex;
+				justify-content: space-between;
+			}
+			.frame>label {
+				margin: 5px 0;
+				margin-right: 10px;
+				padding: 0 5px;
+				border-radius: 0.5em;
+				flex-grow: 1;
+			}
+			input {
+				vertical-align: baseline;
+			}
+			.base1>div {
+				width: 75%;
+			}
+			.base2>div {
+				width: 66.67%;
+			}
+			.base3>div {
+				width: 50%;
+			}
+			.subMenu {
+				width: 100%;
+				margin-top: 5px;
+				background: #999;
+				position: absolute;
+				top: calc(1em + 5px + 2px);
+				right: 0;
+			}
+			.subMenu li {
+				margin: 5px;
+				padding: 2px;
+				background: RGBA(255,255,255,0.3);
+			}
+			.base1,
+			.frame:has(#radio1:checked) .subMenu  {
+				background: RGBA(255,0,0,0.5);
+			}
+			.base2,
+			.frame:has(#radio2:checked) .subMenu  {
+				background: RGBA(0,255,0,0.5);
+			}
+			.base3,
+			.frame:has(#radio3:checked) .subMenu  {
+				background: RGBA(0,0,255,0.5);
+			}
+			.base4,
+			.frame:has(#radio4:checked) .subMenu  {
+				background: RGBA(255,255,0,0.5);
+			}
+			.frame:has(#radio1:checked),
+			.frame:has(#radio2:checked),
+			.frame:has(#radio3:checked),
+			.frame:has(#radio4:checked) {
+				position: relative;
+			}
+			label:has(#radio1:hover),
+			label:has(#radio2:hover),
+			label:has(#radio3:hover),
+			label:has(#radio4:hover) {
+				background: RGBA(255,255,255,0.3);
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<ul class="top">
+				<li>
+					<div class="menu">menu1</div>
+					<ul class="sub wide">
+						<li>subMenu1-1</li>
+						<li>subMenu1-2</li>
+						<li>subMenu1-3</li>
+						<li>subMenu1-4</li>
+						<li>subMenu1-5</li>
+					</ul>
+				</li>
+				<li>
+					<div class="menu">menu2</div>
+					<ul class="sub">
+						<li>subMenu1-1</li>
+						<li>subMenu1-2</li>
+						<li>subMenu1-3</li>
+						<li>subMenu1-4</li>
+						<li>subMenu1-5</li>
+					</ul>
+				</li>
+				<li>
+					<div class="menu">menu3</div>
+					<ul class="sub wide">
+						<li>subMenu1-1</li>
+						<li>subMenu1-2</li>
+						<li>subMenu1-3</li>
+						<li>subMenu1-4</li>
+						<li>subMenu1-5</li>
+					</ul>
+				</li>
+				<li>
+					<div class="menu">menu4</div>
+					<ul class="sub">
+						<li>subMenu1-1</li>
+						<li>subMenu1-2</li>
+						<li>subMenu1-3</li>
+						<li>subMenu1-4</li>
+						<li>subMenu1-5</li>
+					</ul>
+				</li>
+			</ul>
+		</header>
+		<main>
+			<h1>・positionテスト</h1>
+			<p>
+				submenuは width:100%;<br>
+				submenuは menu4と兄弟<br>
+				ラジオボタンがついた位置にposition:relative;を移動
+			</p>
+			<div class="frame base1">
+				<label>
+					<input id="radio1" type="radio" name="areaTest">
+					menu1
+				</label>
+				<div class="frame base2">
+					<label>
+						<input id="radio2" type="radio" name="areaTest">
+						menu2
+					</label>
+					<div class="frame base3">
+						<label>
+							<input id="radio3" type="radio" name="areaTest">
+							menu3
+						</label>
+						<div class="frame base4">
+							<label>
+								<input id="radio4" type="radio" name="areaTest" checked="checked">
+								menu4
+							</label>
+							<ul class="subMenu">
+								<li>submenu1</li>
+								<li>submenu2</li>
+								<li>submenu3</li>
+								<li>submenu4</li>
+							</ul>
+						</div> <!-- menu4 -->
+					</div> <!-- menu3 -->
+				</div> <!-- menu2 -->
+			</div> <!-- menu1 -->
+		</main>
+	</body>
+</html>
