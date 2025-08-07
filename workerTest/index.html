@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="../reset.css">
+		<title>workerTest</title>
+		<style>
+			@charset "utf-8";
+		</style>
+	</head>
+	<body>
+		<head>
+		</head>
+		<main>
+		</main>
+		<footer>
+		</footer>
+		<script>
+			'use strict';
+			//
+			// タイマー
+			let timerID //= setTimeout(myWatcher, 500);
+			let endIs = false;
+			//
+			// Workerの初期化
+			const myWorker = new Worker('test.js');
+			//
+			const sendNum = 10000000;
+			myWorker.postMessage( {num:sendNum, mess:'main'});
+			//
+			myWorker.onmessage = function(evt) {
+				console.log(`catch : ${evt.data.status} @index.html`);
+				console.log(evt.data);
+				if(evt.data.status == 'result') {
+					endIs = true;
+					clearTimeout(timerID);
+				}
+			}
+			//
+			// タイマー;
+			function myWatcher() {
+				console.log('myWatcher');
+				if( !endIs ) {
+					myWorker.postMessage( {num:sendNum, mess:'check'});
+					//timerID = setTimeout(myWatcher, 500);
+				}
+			}
+		</script>
+	</body>
+</html>
